@@ -1,0 +1,53 @@
+version: '3.2.0-{build}'
+
+init:
+- ps: |
+    $version = $env:APPVEYOR_BUILD_VERSION.Split('-')[0]
+    $date = Get-Date -Format "yyyyMMdd"
+    Update-AppveyorBuild -Version "$version.$date-beta-$env:APPVEYOR_BUILD_NUMBER"
+    Write-Host $env:APPVEYOR_BUILD_VERSION
+    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+# Do not build feature branch with open Pull Requests
+skip_branch_with_pr: true
+
+image: Visual Studio 2017
+
+configuration: Release
+
+before_build:
+- git submodule update --init --recursive
+- nuget restore
+- dotnet restore
+
+build_script:
+- msbuild OpenCvSharp.sln /t:build /p:configuration=%CONFIGURATION% /p:platform=x64
+- msbuild OpenCvSharp.sln /t:build /p:configuration=%CONFIGURATION% /p:platform=x86
+
+after_build:
+- ps: |
+    (ls $env:APPVEYOR_BUILD_FOLDER -Recurse).Where{ $_.Extension -eq ".nuspec" }.ForEach{
+      [xml]$xml = Get-Content $_.FullName
+      $xml.package.metadata.version = $env:APPVEYOR_BUILD_VERSION
+      $xml.Save($_.FullName)
+    }
+    nuget pack nuget/OpenCvSharp3-AnyCPU.nuspec -OutputDirectory artifacts
+    nuget pack nuget/OpenCvSharp3-WithoutDll.nuspec -OutputDirectory artifacts
+
+test_script:
+- nunit3-console.exe ./test/OpenCvSharp.Tests/bin/Release/net461/OpenCvSharp.Tests.dll --result=myresults.xml;format=AppVeyor
+# https://www.appveyor.com/docs/running-tests/#nunit-3x
+
+artifacts:
+- path: artifacts\**\*.*
+
+deploy:
+- provider: NuGet
+  server: https://ci.appveyor.com/nuget/shimat
+  api_key:
+    secure: PW0F7tbGr+QLuLPUGy+32pNtMZUJeqjyikz9nKlpALA=
+  skip_symbols: true
+  artifact: /.*\.nupkg/

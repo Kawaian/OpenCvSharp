@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{707296f9-6aef-4548-a66d-4cf3e5795b1a}</ProjectGuid>
+    <Keyword>Android</Keyword>
+    <RootNamespace>OpenCvSharpExternDroid</RootNamespace>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
+    <TargetName>libOpenCvSharpExtern</TargetName>
+    <IncludePath>$(LLVMToolchainPrebuiltRoot)\lib64\clang\$(LLVMVersion)\include;$(ProjectDir)\include;</IncludePath>
+    <UseMultiToolTask>true</UseMultiToolTask>
+    <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
+    <TargetName>libOpenCvSharpExtern</TargetName>
+    <IncludePath>$(LLVMToolchainPrebuiltRoot)\lib64\clang\$(LLVMVersion)\include;$(ProjectDir)\include;</IncludePath>
+    <UseMultiToolTask>true</UseMultiToolTask>
+    <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
+    <TargetName>libOpenCvSharpExtern</TargetName>
+    <IncludePath>$(LLVMToolchainPrebuiltRoot)\lib64\clang\$(LLVMVersion)\include;$(ProjectDir)\include;</IncludePath>
+    <UseMultiToolTask>true</UseMultiToolTask>
+    <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <IncludePath>$(LLVMToolchainPrebuiltRoot)\lib64\clang\$(LLVMVersion)\include;$(ProjectDir)\include;</IncludePath>
+    <LibraryPath>
+    </LibraryPath>
+    <UseMultiToolTask>true</UseMultiToolTask>
+    <OutDir>bin\$(Configuration)\$(Platform)\</OutDir>
+    <TargetName>libOpenCvSharpExtern</TargetName>
+    <IntDir>obj\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>-Wno-unused-function -Wno-unknown-pragmas %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>opencv_calib3d;opencv_features2d;opencv_flann;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_ml;opencv_objdetect;opencv_photo;opencv_shape;opencv_stitching;opencv_superres;opencv_video;opencv_videoio;opencv_videostab;opencv_core;ippicv;IlmImf;libjasper;libwebp;libpng;libjpeg;libtiff;tbb;z;$(StlLibraryName);log;android;%(LibraryDependencies)</LibraryDependencies>
+      <ShowProgress>true</ShowProgress>
+      <AdditionalOptions>-lm</AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ProjectDir)static\x86_64;$(ToolchainPrebuiltPath)\lib\gcc\x86_64-linux-android\$(ToolchainFullVersionName);$(StlLibraryPath)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\x86_64\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>-Wno-unused-function -Wno-unknown-pragmas %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>opencv_calib3d;opencv_features2d;opencv_flann;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_ml;opencv_objdetect;opencv_photo;opencv_shape;opencv_stitching;opencv_superres;opencv_video;opencv_videoio;opencv_videostab;opencv_core;ippicv;IlmImf;libjasper;libwebp;libpng;libjpeg;libtiff;tbb;z;$(StlLibraryName);log;android;%(LibraryDependencies)</LibraryDependencies>
+      <ShowProgress>true</ShowProgress>
+      <AdditionalOptions>-lm</AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ProjectDir)static\x86;$(ToolchainPrebuiltPath)\lib\gcc\i686-linux-android\$(ToolchainFullVersionName);$(StlLibraryPath)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\x86\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <EnableNeonCodegen>true</EnableNeonCodegen>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>-Wno-unused-function -Wno-unknown-pragmas %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>opencv_calib3d;opencv_features2d;opencv_flann;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_ml;opencv_objdetect;opencv_photo;opencv_shape;opencv_stitching;opencv_superres;opencv_video;opencv_videoio;opencv_videostab;opencv_core;tegra_hal;IlmImf;libjasper;libwebp;libpng;libjpeg;libtiff;tbb;z;$(StlLibraryName);log;android;%(LibraryDependencies)</LibraryDependencies>
+      <ShowProgress>true</ShowProgress>
+      <AdditionalOptions>-lm</AdditionalOptions>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ProjectDir)static\arm64-v8a;$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName);$(StlLibraryPath)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\arm64-v8a\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <EnableNeonCodegen>true</EnableNeonCodegen>
+      <CppLanguageStandard>Default</CppLanguageStandard>
+      <CLanguageStandard>Default</CLanguageStandard>
+      <PreprocessorDefinitions>NDEBUG;_USRDLL;CVAPI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>Default</CompileAs>
+      <AdditionalOptions>-Wno-unused-function -Wno-unknown-pragmas %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <ShowProgress>true</ShowProgress>
+      <AdditionalOptions>-lm</AdditionalOptions>
+      <AdditionalLibraryDirectories>$(ProjectDir)static\armeabi-v7a;$(Sysroot)\usr\lib;$(ToolchainPrebuiltPath)\lib\gcc\$(ToolchainName)\$(ToolchainFullVersionName)\$(PlatformShortName);$(StlLibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LibraryDependencies>opencv_calib3d;opencv_features2d;opencv_flann;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_ml;opencv_objdetect;opencv_photo;opencv_shape;opencv_stitching;opencv_superres;opencv_video;opencv_videoio;opencv_videostab;opencv_core;tegra_hal;IlmImf;libjasper;libwebp;libpng;libjpeg;libtiff;tbb;z;$(StlLibraryName);log;android;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy built so to Android</Message>
+      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\armeabi-v7a\$(TargetFileName)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="calib3d.cpp" />
+    <ClCompile Include="core.cpp" />
+    <ClCompile Include="cuda.cpp" />
+    <ClCompile Include="features2d.cpp" />
+    <ClCompile Include="flann.cpp" />
+    <ClCompile Include="highgui.cpp" />
+    <ClCompile Include="imgcodecs.cpp" />
+    <ClCompile Include="imgproc.cpp" />
+    <ClCompile Include="ml.cpp" />
+    <ClCompile Include="objdetect.cpp" />
+    <ClCompile Include="OpenCvSharpExternDroid.cpp">
+      <DeploymentContent>true</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="photo.cpp" />
+    <ClCompile Include="shape.cpp" />
+    <ClCompile Include="std_vector.cpp" />
+    <ClCompile Include="stitching.cpp" />
+    <ClCompile Include="video.cpp" />
+    <ClCompile Include="videoio.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="calib3d.h" />
+    <ClInclude Include="calib3d_StereoBM.h" />
+    <ClInclude Include="calib3d_StereoMatcher.h" />
+    <ClInclude Include="calib3d_StereoSGBM.h" />
+    <ClInclude Include="core.h" />
+    <ClInclude Include="core_Algorithm.h" />
+    <ClInclude Include="core_FileStorage.h" />
+    <ClInclude Include="core_InputArray.h" />
+    <ClInclude Include="core_Mat.h" />
+    <ClInclude Include="core_MatExpr.h" />
+    <ClInclude Include="core_OutputArray.h" />
+    <ClInclude Include="core_PCA.h" />
+    <ClInclude Include="core_RNG.h" />
+    <ClInclude Include="core_SparseMat.h" />
+    <ClInclude Include="core_SVD.h" />
+    <ClInclude Include="cuda.h" />
+    <ClInclude Include="cuda_GpuMat.h" />
+    <ClInclude Include="features2d.h" />
+    <ClInclude Include="features2d_AgastFeatureDetector.h" />
+    <ClInclude Include="features2d_AKAZE.h" />
+    <ClInclude Include="features2d_BOW.h" />
+    <ClInclude Include="features2d_BRISK.h" />
+    <ClInclude Include="features2d_DescriptorMatcher.h" />
+    <ClInclude Include="features2d_FastFeatureDetector.h" />
+    <ClInclude Include="features2d_FeatureDetector.h" />
+    <ClInclude Include="features2d_GFTTDetector.h" />
+    <ClInclude Include="features2d_KAZE.h" />
+    <ClInclude Include="features2d_KeyPointsFilter.h" />
+    <ClInclude Include="features2d_MSER.h" />
+    <ClInclude Include="features2d_ORB.h" />
+    <ClInclude Include="features2d_SimpleBlobDetector.h" />
+    <ClInclude Include="flann.h" />
+    <ClInclude Include="flann_IndexParams.h" />
+    <ClInclude Include="highgui.h" />
+    <ClInclude Include="imgcodecs.h" />
+    <ClInclude Include="imgproc.h" />
+    <ClInclude Include="imgproc_CLAHE.h" />
+    <ClInclude Include="imgproc_GeneralizedHough.h" />
+    <ClInclude Include="imgproc_LineIterator.h" />
+    <ClInclude Include="imgproc_LineSegmentDetector.h" />
+    <ClInclude Include="imgproc_Subdiv2D.h" />
+    <ClInclude Include="include_opencv.h" />
+    <ClInclude Include="ml.h" />
+    <ClInclude Include="ml_ANN_MLP.h" />
+    <ClInclude Include="ml_Boost.h" />
+    <ClInclude Include="ml_DTrees.h" />
+    <ClInclude Include="ml_EM.h" />
+    <ClInclude Include="ml_KNearest.h" />
+    <ClInclude Include="ml_LogisticRegression.h" />
+    <ClInclude Include="ml_NormalBayesClassifier.h" />
+    <ClInclude Include="ml_RTrees.h" />
+    <ClInclude Include="ml_StatModel.h" />
+    <ClInclude Include="ml_SVM.h" />
+    <ClInclude Include="my_functions.h" />
+    <ClInclude Include="my_types.h" />
+    <ClInclude Include="objdetect.h" />
+    <ClInclude Include="objdetect_HOGDescriptor.h" />
+    <ClInclude Include="OpenCvSharpExternDroid.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="photo.h" />
+    <ClInclude Include="photo_HDR.h" />
+    <ClInclude Include="shape_ShapeDistanceExtractor.h" />
+    <ClInclude Include="std_vector.h" />
+    <ClInclude Include="stitching.h" />
+    <ClInclude Include="stitching_detail_Matchers.h" />
+    <ClInclude Include="superres.h" />
+    <ClInclude Include="video.h" />
+    <ClInclude Include="videoio.h" />
+    <ClInclude Include="video_background_segm.h" />
+    <ClInclude Include="video_tracking.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
