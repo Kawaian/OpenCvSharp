@@ -18,8 +18,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCvSharp", "src\OpenCvSharp\OpenCvSharp.csproj", "{658C140F-2E73-4E22-80A7-F05DF0A83318}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCvSharp.Android", "src\OpenCvSharp.Android\OpenCvSharp.Android.csproj", "{F94F9E8A-E239-45EA-9C61-C7855C8B6F25}"
+	ProjectSection(ProjectDependencies) = postProject
+		{707296F9-6AEF-4548-A66D-4CF3E5795B1A} = {707296F9-6AEF-4548-A66D-4CF3E5795B1A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCvSharp.Windows", "src\OpenCvSharp.Windows\OpenCvSharp.Windows.csproj", "{D7856971-D877-4CB1-A08C-C2A763EBFAD1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E7279F8-F801-4672-B42F-1ED2C68B16A4} = {8E7279F8-F801-4672-B42F-1ED2C68B16A4}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCvSharp.Tests.Windows", "test\OpenCvSharp.Tests.Windows\OpenCvSharp.Tests.Windows.csproj", "{B5323A43-58C7-4006-BEEC-E315CABA3673}"
 EndProject
@@ -163,8 +169,8 @@ Global
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|ARM.ActiveCfg = Release|Any CPU
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|Win_x64.ActiveCfg = Release|Any CPU
-		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|Win_x64.Build.0 = Release|Any CPU
+		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|Win_x64.ActiveCfg = Release|x64
+		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|Win_x64.Build.0 = Release|x64
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|x64.ActiveCfg = Release|Any CPU
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
