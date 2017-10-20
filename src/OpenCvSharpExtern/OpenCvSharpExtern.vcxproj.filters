@@ -79,6 +79,7 @@
     <ClCompile Include="xphoto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="stitching\matchers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.h">
