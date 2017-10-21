@@ -61,7 +61,7 @@ namespace OpenCvSharp
         /// </summary>
         /// <param name="winname">Name of the window.</param>
         /// <param name="mat">Image to be shown.</param>
-        public static void ImShow(string winname, Mat mat)
+        internal static void PInvokeImShow(string winname, Mat mat)
         {
             if (string.IsNullOrEmpty(winname))
                 throw new ArgumentNullException(nameof(winname));
@@ -91,7 +91,7 @@ namespace OpenCvSharp
         /// </summary>
         /// <param name="delay">Delay in milliseconds. 0 is the special value that means ”forever”</param>
         /// <returns>Returns the code of the pressed key or -1 if no key was pressed before the specified time had elapsed.</returns>
-        public static int WaitKey(int delay = 0)
+        internal static int PInvokeWaitKey(int delay = 0)
         {
             try
             {
