@@ -78,14 +78,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="OpenCvSharpExtern.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="..\..\opencv\3.2\x64\vc14\bin\opencv_ffmpeg320_64.dll">
+      <Link>opencv_ffmpeg320_64.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\opencv\3.2\x64\vc14\bin\opencv_ffmpeg320_64.dll">
-      <Link>opencv_ffmpeg320_64.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="..\..\opencv\3.2\x64\vc14\bin\opencv_world320.dll">
+      <Link>opencv_world320.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="OpenCvSharpExtern.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -91,7 +91,7 @@ namespace OpenCvSharp.Tests.Windows
                     if(cap != null)
                     {
                         double lastMs = 0;
-                        double fps = cap.Fps;
+                        double fps = cap.Get(CaptureProperty.Fps);
                         if(fps < 1)
                         {
                             fps = 30;
