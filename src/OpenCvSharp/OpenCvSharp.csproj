@@ -341,6 +341,7 @@
     <Compile Include="Modules\xphoto\LearningBasedWB.cs" />
     <Compile Include="Modules\xphoto\SimpleWB.cs" />
     <Compile Include="Modules\xphoto\WhiteBalancer.cs" />
+    <Compile Include="NativeBindings.cs" />
     <Compile Include="PInvoke\calib3d\NativeMethods_calib3d.cs" />
     <Compile Include="PInvoke\calib3d\NativeMethods_calib3d_StereoBM.cs" />
     <Compile Include="PInvoke\calib3d\NativeMethods_calib3d_StereoMatcher.cs" />

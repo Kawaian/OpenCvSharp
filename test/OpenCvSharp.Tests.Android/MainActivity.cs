@@ -40,6 +40,13 @@ namespace OpenCvSharp.Tests.Android
                     System.Diagnostics.Debug.WriteLine($"Row:{result.Rows}, Col:{result.Cols}");
 
                     button.Text = $"{count++} clicks! / {NativeMethods.core_Mat_sizeof()}";
+
+                    VideoCapture cp = new VideoCapture(0);
+                    Mat frame = new Mat();
+                    var ret = cp.Read(frame);
+                    System.Diagnostics.Debug.WriteLine("ret: " + ret);
+                    System.Diagnostics.Debug.WriteLine("rett: " + frame.Rows);
+                    System.Diagnostics.Debug.WriteLine("he: " + frame.At<byte>(123));
                 }
                 catch(Exception ex)
                 {
