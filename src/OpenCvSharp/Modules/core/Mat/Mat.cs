@@ -4918,6 +4918,10 @@ namespace OpenCvSharp
 
         #endregion
 
+        public bool IsEmpty => Empty();
+        public int Channel => Channels();
+        public Size SizeProperty => Size();
+
         /// <summary>
         /// 
         /// </summary>

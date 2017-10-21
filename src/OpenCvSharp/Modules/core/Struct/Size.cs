@@ -21,6 +21,15 @@ namespace OpenCvSharp
         /// </summary>
         public int Height;
 
+        public Size(int square) : this(square, square)
+        {
+
+        }
+
+        public Size(double square) : this (square, square)
+        {
+
+        }
         /// <summary>
         /// 
         /// </summary>
