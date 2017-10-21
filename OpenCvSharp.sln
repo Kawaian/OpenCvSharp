@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E048D213-B3B9-453F-9A41-29FDEB0D496B}"
 EndProject
@@ -201,6 +201,7 @@ Global
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|Win_x64.Build.0 = Release|x64
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|x64.ActiveCfg = Release|Any CPU
 		{B5323A43-58C7-4006-BEEC-E315CABA3673}.Release|x86.ActiveCfg = Release|Any CPU
+		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Debug|Android.ActiveCfg = Debug|Win32
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Debug|ARM.ActiveCfg = Debug|Win32
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Debug|ARM64.ActiveCfg = Debug|Win32
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Debug|Win_x64.ActiveCfg = Debug|x64
@@ -209,6 +210,7 @@ Global
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Debug|x64.Build.0 = Debug|x64
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Debug|x86.ActiveCfg = Debug|Win32
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Debug|x86.Build.0 = Debug|Win32
+		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Release|Android.ActiveCfg = Release|Win32
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Release|ARM.ActiveCfg = Release|Win32
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Release|ARM64.ActiveCfg = Release|Win32
 		{786EEB0D-2560-4B54-949F-114836A4EB9A}.Release|Win_x64.ActiveCfg = Release|x64
