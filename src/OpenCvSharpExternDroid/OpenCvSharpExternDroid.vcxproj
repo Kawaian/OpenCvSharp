@@ -99,7 +99,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\x86_64\$(TargetFileName)"</Command>
+      <Command>copy "$(LocalDebuggerCommand)" "$(ProjectDir)..\OpenCvSharp.Android\Native\x86_64\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -119,7 +119,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\x86\$(TargetFileName)"</Command>
+      <Command>copy "$(LocalDebuggerCommand)" "$(ProjectDir)..\OpenCvSharp.Android\Native\x86\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -140,7 +140,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\arm64-v8a\$(TargetFileName)"</Command>
+      <Command>copy "$(LocalDebuggerCommand)" "$(ProjectDir)..\OpenCvSharp.Android\Native\arm64-v8a\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -166,7 +166,7 @@
     </Link>
     <PostBuildEvent>
       <Message>Copy built so to Android</Message>
-      <Command>copy "$(LocalDebuggerCommand)" "$(SolutionDir)src\OpenCvSharp.Android\Native\armeabi-v7a\$(TargetFileName)"</Command>
+      <Command>copy "$(LocalDebuggerCommand)" "$(ProjectDir)..\OpenCvSharp.Android\Native\armeabi-v7a\$(TargetFileName)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
