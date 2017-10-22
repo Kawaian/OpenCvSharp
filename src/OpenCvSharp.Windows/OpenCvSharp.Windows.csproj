@@ -88,8 +88,11 @@
       <Link>opencv_world320.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="OpenCvSharpExtern.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\OpenCvSharpExtern\bin\Release\x64\OpenCvSharpExtern.dll">
+      <Link>OpenCvSharpExtern.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
