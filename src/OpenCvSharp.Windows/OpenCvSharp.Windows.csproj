@@ -92,7 +92,7 @@
   <ItemGroup>
     <None Include="..\OpenCvSharpExtern\bin\Release\x64\OpenCvSharpExtern.dll">
       <Link>OpenCvSharpExtern.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
