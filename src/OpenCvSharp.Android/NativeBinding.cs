@@ -43,7 +43,13 @@ namespace OpenCvSharp.Android
                 using (Mat mat = new Mat())
                 {
                     Cv2.CvtColor(m, mat, ColorConversionCodes.BGR2RGB);
-                    
+
+                    byte[] buffer = new byte[mat.Channel * mat.Total()];
+                    mat.GetArray(0, 0, buffer);
+                    using (var raw = ByteBuffer.Wrap(buffer))
+                    {
+                        bit.CopyPixelsFromBuffer(raw);
+                    }
                     //Utils.MatToBitmap((Mat)mat.Object, bit);
 
                     MainActivity.RunOnUiThread(() =>

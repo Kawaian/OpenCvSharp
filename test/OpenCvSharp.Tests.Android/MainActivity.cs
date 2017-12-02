@@ -23,6 +23,7 @@ namespace OpenCvSharp.Tests.Android
             cap.FrameReady += (sender, arg) =>
             {
                 var m = arg.Mat;
+                Cv2.ImShow("a", m);
             };
             
             Button button = FindViewById<Button>(Resource.Id.myButton);
