@@ -14,12 +14,17 @@ namespace OpenCvSharp.Tests.Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
+            ImageView imgView = FindViewById<ImageView>(Resource.Id.imageView1);
+            OpenCvSharp.Android.NativeBinding.Init(this, this, imgView);
+
+            var cap = Native.NativeBindings.Kernal.NewCapture(0);
+            cap.FrameReady += (sender, arg) =>
+            {
+                var m = arg.Mat;
+            };
+            
             Button button = FindViewById<Button>(Resource.Id.myButton);
 
             button.Click += delegate 
@@ -39,16 +44,19 @@ namespace OpenCvSharp.Tests.Android
                     result.GetArray(0, 0, get);
                     System.Diagnostics.Debug.WriteLine($"Row:{result.Rows}, Col:{result.Cols}");
 
-                    button.Text = $"{count++} clicks! / {NativeMethods.core_Mat_sizeof()}";
+                    button.Text = $"{count++} clicks! / {NativeMethods.core_Mat_sizeof()}\n";
 
-                    VideoCapture cp = new VideoCapture(0);
-                    Mat frame = new Mat();
-                    var ret = cp.Read(frame);
-                    System.Diagnostics.Debug.WriteLine("ret: " + ret);
-                    System.Diagnostics.Debug.WriteLine("rett: " + frame.Rows);
-                    System.Diagnostics.Debug.WriteLine("he: " + frame.At<byte>(123));
+                    if (cap.IsRunning)
+                    {
+                        cap.Stop();
+                    }
+                    else
+                    {
+                        cap.Start();
+                    }
+                    button.Text += cap.IsRunning ? "Running" : "Nope";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine("=========== ERROR OCCURED WHILE LOAD LIB ============\n"+ex.ToString());
                     Toast.MakeText(this, ex.ToString(), ToastLength.Long);

@@ -34,6 +34,9 @@ namespace OpenCvSharp.Tests.Windows
 
         static Program()
         {
+            //IMPORTANT
+            OpenCvSharp.Windows.NativeBindings.Init();
+
             sw = new Stopwatch();
             sw.Start();
             ofd = new OpenFileDialog();

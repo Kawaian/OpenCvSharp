@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="BitmapConverter.cs" />
     <Compile Include="BitmapSourceConverter.cs" />
+    <Compile Include="NativeBindings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WriteableBitmapConverter.cs" />
   </ItemGroup>

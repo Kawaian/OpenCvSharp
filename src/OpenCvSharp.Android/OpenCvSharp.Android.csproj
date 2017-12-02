@@ -44,6 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidCapture.cs" />
+    <Compile Include="CameraPreviewCallback.cs" />
+    <Compile Include="LimitedTaskScheduler.cs" />
+    <Compile Include="NativeBinding.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
