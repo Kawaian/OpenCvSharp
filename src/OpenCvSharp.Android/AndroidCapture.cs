@@ -14,7 +14,6 @@ using Hardware = Android.Hardware;
 using Graphics = Android.Graphics;
 using OpenCvSharp;
 using OpenCvSharp.Native;
-using Vision;
 
 #pragma warning disable CS0618
 

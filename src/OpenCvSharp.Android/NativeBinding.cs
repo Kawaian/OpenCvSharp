@@ -42,7 +42,8 @@ namespace OpenCvSharp.Android
                 Bitmap bit = Bitmap.CreateBitmap(m.Width, m.Height, Bitmap.Config.Argb8888);
                 using (Mat mat = new Mat())
                 {
-                    Cv2.CvtColor(m, mat, ColorConversionCodes.BGR2RGB);
+                    Profiler.Start("imshow");
+                    Cv2.CvtColor(m, mat, ColorConversionCodes.BGR2RGBA);
 
                     byte[] buffer = new byte[mat.Channel * mat.Total()];
                     mat.GetArray(0, 0, buffer);
@@ -50,7 +51,7 @@ namespace OpenCvSharp.Android
                     {
                         bit.CopyPixelsFromBuffer(raw);
                     }
-                    //Utils.MatToBitmap((Mat)mat.Object, bit);
+                    Profiler.End("imshow");
 
                     MainActivity.RunOnUiThread(() =>
                     {

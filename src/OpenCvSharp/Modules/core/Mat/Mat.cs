@@ -3287,7 +3287,7 @@ namespace OpenCvSharp
         /// <param name="data"></param>
         public void GetArray(int row, int col, byte[] data)
         {
-            CheckArgumentsForConvert(row, col, data, 1, new[]{MatType.CV_8SC1, MatType.CV_8UC1});
+            //CheckArgumentsForConvert(row, col, data, 1, new[]{MatType.CV_8SC1, MatType.CV_8UC1});
             unsafe
             {
                 fixed (byte* pData = data)
