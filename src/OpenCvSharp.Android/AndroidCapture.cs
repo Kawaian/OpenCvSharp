@@ -23,7 +23,7 @@ namespace OpenCvSharp.Android
     {
         private double fps;
         public override double FPS => fps;
-        public bool MultiThread { get; set; } = false;
+        public bool MultiThread { get; set; } = true;
 
         public override bool IsOpened => Camera != null;
 
@@ -74,11 +74,11 @@ namespace OpenCvSharp.Android
                 {
                     Logger.Log(this, $"Camera Support Size: W{size.Width},H{size.Height}");
 
-                    if (size.Width == 1280 && size.Height == 720)
+                    if (size.Width == 1440 && size.Height == 1080)
                     {
                         parameter.SetPreviewSize(size.Width, size.Height);
                         Logger.Log(this, $"SET Camera Size: W{size.Width},H{size.Height}");
-                        break;
+                        //break;
                     }
                 }
 
