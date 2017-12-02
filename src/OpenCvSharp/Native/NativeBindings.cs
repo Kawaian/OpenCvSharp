@@ -49,6 +49,14 @@ namespace OpenCvSharp.Native
             OnStop();
         }
         protected abstract void OnStop();
+
+        public void Wait()
+        {
+            while (IsRunning)
+            {
+                NativeBindings.Kernal.Sleep(1);
+            }
+        }
         
         public static Capture New(int index)
         {

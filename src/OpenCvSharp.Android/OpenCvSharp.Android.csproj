@@ -55,7 +55,9 @@
     <EmbeddedNativeLibrary Include="Native\arm64-v8a\libOpenCvSharpExtern.so">
       <Abi>arm64-v8a</Abi>
     </EmbeddedNativeLibrary>
-    <EmbeddedNativeLibrary Include="Native\armeabi-v7a\libOpenCvSharpExtern.so" />
+    <EmbeddedNativeLibrary Include="Native\armeabi-v7a\libOpenCvSharpExtern.so" >
+      <Abi>armeabi-v7a</Abi>
+    </EmbeddedNativeLibrary>
     <EmbeddedNativeLibrary Include="Native\x86\libOpenCvSharpExtern.so">
       <Abi>x86</Abi>
     </EmbeddedNativeLibrary>
