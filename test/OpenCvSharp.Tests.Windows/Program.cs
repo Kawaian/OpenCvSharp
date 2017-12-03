@@ -69,12 +69,13 @@ namespace OpenCvSharp.Tests.Windows
                     Console.Write("Index (if empty, open video) >>> ");
                     var read = Console.ReadLine();
 
-                    VideoCapture cap = null;
+                    Native.Capture cap = null;
+
                     if (string.IsNullOrWhiteSpace(read))
                     {
                         if(ofd.ShowDialog() == DialogResult.OK)
                         {
-                            cap = new VideoCapture(ofd.FileName);
+                            cap = Native.NativeBindings.Kernal.NewCapture(ofd.FileName);
                         }
                     }
                     else
@@ -87,41 +88,21 @@ namespace OpenCvSharp.Tests.Windows
                         catch { }
                         if(ind != int.MaxValue)
                         {
-                            cap = new VideoCapture(ind);
+                            cap = Native.NativeBindings.Kernal.NewCapture(ind);
                         }
                     }
 
-                    if(cap != null)
+                    cap.FrameReady += (o, a)=>
                     {
-                        double lastMs = 0;
-                        double fps = cap.Get(CaptureProperty.Fps);
-                        if(fps < 1)
+                        Cv2.ImShow("capture", a.Mat);
+                        if(a.LastKey == 'e')
                         {
-                            fps = 30;
+                            a.Break = true;
                         }
-
-                        while (true)
-                        {
-                            using(Mat mat = new Mat())
-                            {
-                                if (cap.Read(mat) && !mat.Empty())
-                                {
-                                    Cv2.ImShow("cap", mat);
-                                    int sleep = (int)Math.Max(1, (1000.0 / fps) - (sw.ElapsedMilliseconds - lastMs));
-                                    lastMs = sw.ElapsedMilliseconds;
-                                    char c = (char)Cv2.WaitKey(sleep);
-                                    if(c == 'e')
-                                    {
-                                        return;
-                                    }
-                                }
-                                else
-                                {
-                                    Thread.Sleep(1);
-                                }
-                            }
-                        }
-                    }
+                    };
+                    cap.Start();
+                    cap.Wait();
+                    cap.Dispose();
                 })
             },
             {

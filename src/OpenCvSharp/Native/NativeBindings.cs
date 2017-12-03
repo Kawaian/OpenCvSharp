@@ -82,7 +82,7 @@ namespace OpenCvSharp.Native
         /// </summary>
         public bool Break { get; set; } = false;
 
-        public FrameArgs(Mat mat, char k = (char)0)
+        public FrameArgs(Mat mat, char k = (char)255)
         {
             Mat = mat;
             LastKey = k;
@@ -104,6 +104,18 @@ namespace OpenCvSharp.Native
         public abstract void ImShow(string name, Mat m);
         public abstract int WaitKey(int sleep = 0);
         public abstract void Sleep(int sleep = 0);
+        public void SleepEx(int sleep = 0)
+        {
+            double startMs = Logger.Stopwatch.Elapsed.TotalMilliseconds;
+            while (true)
+            {
+                Sleep(1);
+                if(Logger.Stopwatch.Elapsed.TotalMilliseconds - startMs > sleep - 0.7)
+                {
+                    return;
+                }
+            }
+        }
     }
 
     public abstract class DefaultNativeBindings : NativeBindings
