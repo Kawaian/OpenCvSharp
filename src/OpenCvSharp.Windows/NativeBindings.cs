@@ -19,11 +19,27 @@ namespace OpenCvSharp.Windows
         public WindowsCapture(int index)
         {
             capture = new VideoCapture(index);
+            Init();
         }
 
         public WindowsCapture(string file)
         {
             capture = new VideoCapture(file);
+            Init();
+        }
+
+        void Init()
+        {
+            capture.Set(CaptureProperty.FourCC, (double)FourCC.MJPG);
+            capture.Set(CaptureProperty.Fps, 30);
+
+            capture.Set(CaptureProperty.FrameWidth, 2048);
+            capture.Set(CaptureProperty.FrameHeight, 2048);
+
+            double w = capture.Get(CaptureProperty.FrameWidth);
+            double h = capture.Get(CaptureProperty.FrameHeight);
+
+            Logger.Log($"Capture Size: (w:{w},h:{h})  CaptureFormat:{capture.Get(CaptureProperty.FourCC)}");
         }
 
         public override void Dispose()
@@ -61,6 +77,8 @@ namespace OpenCvSharp.Windows
                 FrameArgs arg = new FrameArgs(mat, lastKey);
                 if (capture.Read(mat) && !mat.Empty())
                 {
+                    Cv2.Flip(mat, mat, FlipMode.Y);
+
                     FrameReady?.Invoke(this, arg);
 
                     int sleep = (int)Math.Max(1, (1000.0 / fps) - (Logger.Stopwatch.ElapsedMilliseconds - lastMs));
