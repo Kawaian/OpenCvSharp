@@ -91,7 +91,12 @@ namespace OpenCvSharp.Native
 
     public abstract class NativeBindings
     {
-        public static NativeBindings Kernal { get; set; }
+        private static NativeBindings kernal;
+        public static NativeBindings Kernal
+        {
+            get => kernal;
+            set { kernal = value; NativeMethods.TryPInvoke(); }
+        }
 
         public abstract Capture NewCapture(int index);
         public abstract Capture NewCapture(string file);
