@@ -15,7 +15,7 @@ using Java.Nio;
 
 namespace OpenCvSharp.Android
 {
-    public class NativeBinding : Native.NativeBindings
+    public class NativeBinding : NativeBindings
     {
         public static NativeBinding K => (NativeBinding)Kernal;
 
@@ -35,42 +35,86 @@ namespace OpenCvSharp.Android
             ImShowTarget = imShowTarget;
         }
 
+        Bitmap imShowBitmap;
+        byte[] imShowBuffer;
+        object imShowLocker = new object();
         public override void ImShow(string name, Mat m)
         {
             if (ImShowTarget != null)
             {
-                Bitmap bit = Bitmap.CreateBitmap(m.Width, m.Height, Bitmap.Config.Argb8888);
-                using (Mat mat = new Mat())
+                Profiler.Start("imshow");
+                lock (imShowLocker)
                 {
-                    Profiler.Start("imshow");
-                    Cv2.CvtColor(m, mat, ColorConversionCodes.BGR2RGBA);
-
-                    byte[] buffer = new byte[mat.Channel * mat.Total()];
-                    mat.GetArray(0, 0, buffer);
-                    using (var raw = ByteBuffer.Wrap(buffer))
+                    if (imShowBitmap == null)
                     {
-                        bit.CopyPixelsFromBuffer(raw);
+                        imShowBitmap = Bitmap.CreateBitmap(m.Width, m.Height, Bitmap.Config.Argb8888);
                     }
-                    Profiler.End("imshow");
-
-                    MainActivity.RunOnUiThread(() =>
+                    else if (imShowBitmap.Width != m.Width && imShowBitmap.Height != m.Height)
                     {
-                        ImShowTarget.SetImageBitmap(bit);
-                    });
+                        //imShowBitmap.Recycle();
+                        //imShowBitmap.Dispose();
+                        imShowBitmap = Bitmap.CreateBitmap(m.Width, m.Height, Bitmap.Config.Argb8888);
+                    }
+
+                    using (Mat mat = new Mat())
+                    {
+                        Cv2.CvtColor(m, mat, ColorConversionCodes.BGR2RGBA);
+
+                        var bufLen = mat.Channel * mat.Total();
+                        if (imShowBuffer == null || imShowBuffer.Length != bufLen)
+                        {
+                            imShowBuffer = new byte[bufLen];
+                        }
+                        mat.GetArray(0, 0, imShowBuffer);
+
+                        using (var raw = ByteBuffer.Wrap(imShowBuffer))
+                        {
+                            imShowBitmap.CopyPixelsFromBuffer(raw);
+                        }
+
+                        MainActivity.RunOnUiThread(() =>
+                        {
+                            ImShowTarget.SetImageBitmap(imShowBitmap);
+                        });
+                    }
                 }
+                Profiler.End("imshow");
             }
+        }
+
+        char keyPending = (char)255;
+        public void SendKey(char key)
+        {
+            keyPending = key;
         }
 
         public override int WaitKey(int sleep = 0)
         {
-            System.Threading.Thread.Sleep(sleep);
+            var ret = keyPending;
 
-            return 255;
+            Sleep(sleep);
+
+            keyPending = (char)255;
+            return ret;
         }
 
         public override void Sleep(int sleep = 0)
         {
-            System.Threading.Thread.Sleep(sleep);
+            if (sleep <= 0)
+            {
+                while (true)
+                {
+                    if(keyPending != 255)
+                    {
+                        Sleep(1);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                System.Threading.Thread.Sleep(sleep);
+            }
         }
 
         public override Capture NewCapture(int index)
@@ -81,6 +125,16 @@ namespace OpenCvSharp.Android
         public override Capture NewCapture(string file)
         {
             return new AndroidCapture(file);
+        }
+
+        public override void NamedWindow(string winname, WindowMode flags)
+        {
+
+        }
+
+        public override void DestroyAllWindows()
+        {
+
         }
     }
 }

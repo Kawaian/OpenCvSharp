@@ -22,6 +22,16 @@ namespace OpenCvSharp
         {
             return NativeBindings.Kernal.WaitKey(sleep);
         }
+        
+        public static void NamedWindow(string winname, WindowMode flags)
+        {
+            NativeBindings.Kernal.NamedWindow(winname, flags);
+        }
+
+        public static void DestroyAllWindows()
+        {
+            NativeBindings.Kernal.DestroyAllWindows();
+        }
     }
 }
 
@@ -101,6 +111,8 @@ namespace OpenCvSharp.Native
         public abstract Capture NewCapture(int index);
         public abstract Capture NewCapture(string file);
 
+        public abstract void NamedWindow(string winname, WindowMode flags);
+        public abstract void DestroyAllWindows();
         public abstract void ImShow(string name, Mat m);
         public abstract int WaitKey(int sleep = 0);
         public abstract void Sleep(int sleep = 0);
@@ -120,6 +132,16 @@ namespace OpenCvSharp.Native
 
     public abstract class DefaultNativeBindings : NativeBindings
     {
+        public override void DestroyAllWindows()
+        {
+            Cv2.DestroyAllWindows();
+        }
+
+        public override void NamedWindow(string winname, WindowMode flags)
+        {
+            Cv2.PInvokeNamedWindow(winname, flags);
+        }
+
         public override void ImShow(string name, Mat m)
         {
             Cv2.PInvokeImShow(name, m);

@@ -23,7 +23,7 @@ namespace OpenCvSharp
         /// Flags of the window. Currently the only supported flag is CV WINDOW AUTOSIZE. If this is set, 
         /// the window size is automatically adjusted to fit the displayed image (see imshow ), and the user can not change the window size manually.
         /// </param>
-        public static void NamedWindow(string winname, WindowMode flags)
+        internal static void PInvokeNamedWindow(string winname, WindowMode flags)
         {
             if (string.IsNullOrEmpty(winname))
                 throw new ArgumentNullException(nameof(winname));
@@ -51,7 +51,7 @@ namespace OpenCvSharp
         /// <summary>
         /// 
         /// </summary>
-        public static void DestroyAllWindows()
+        internal static void PInvokeDestroyAllWindows()
         {
             NativeMethods.highgui_destroyAllWindows();
         }

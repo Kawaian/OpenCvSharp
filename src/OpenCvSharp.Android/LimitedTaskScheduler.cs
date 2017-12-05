@@ -16,7 +16,7 @@ namespace OpenCvSharp.Android
 {
     class LimitedTaskScheduler : TaskScheduler
     {
-        public static LimitedTaskScheduler Scheduler = new LimitedTaskScheduler(System.Environment.ProcessorCount);
+        public static LimitedTaskScheduler Scheduler = new LimitedTaskScheduler(Math.Max(1, System.Environment.ProcessorCount / 2));
         public static TaskFactory Factory = new TaskFactory(Scheduler);
         public static int QueuedTaskCount
         {
