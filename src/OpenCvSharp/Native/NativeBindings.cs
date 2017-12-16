@@ -134,7 +134,7 @@ namespace OpenCvSharp.Native
     {
         public override void DestroyAllWindows()
         {
-            Cv2.DestroyAllWindows();
+            Cv2.PInvokeDestroyAllWindows();
         }
 
         public override void NamedWindow(string winname, WindowMode flags)
