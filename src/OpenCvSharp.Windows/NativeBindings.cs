@@ -46,10 +46,9 @@ namespace OpenCvSharp.Windows
         {
             if(capture != null)
             {
-                Stop();
-
                 capture.Dispose();
                 capture = null;
+                Stop();
             }
         }
 
