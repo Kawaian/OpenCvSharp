@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenCvSharp
 {
-    public static class Profiler
+    public static class CvProfiler
     {
         public static bool IsDebug = true;
         public static bool ReportOn = true;
@@ -19,7 +19,7 @@ namespace OpenCvSharp
         static Dictionary<string, ProfilerData> Data = new Dictionary<string, ProfilerData>();
         static double lastMs = 0;
 
-        static Profiler()
+        static CvProfiler()
         {
             Stopwatch = new Stopwatch();
             Stopwatch.Start();
@@ -31,7 +31,7 @@ namespace OpenCvSharp
                 return;
 
             if (showlog)
-                Logger.Log("Logger", $"\"{name}\" Flag is started");
+                CvLogger.Log("Logger", $"\"{name}\" Flag is started");
 
             lock (DataLocker)
             {
@@ -47,7 +47,7 @@ namespace OpenCvSharp
                 return;
 
             if (showlog)
-                Logger.Log("Logger", $"\"{name}\" Flag is ended");
+                CvLogger.Log("Logger", $"\"{name}\" Flag is ended");
 
             lock (DataLocker)
             {
@@ -120,7 +120,7 @@ namespace OpenCvSharp
                     sb.AppendLine(d.ToString());
                 }
 
-                Logger.Log(sb.ToString());
+                CvLogger.Log(sb.ToString());
 
                 sb.Clear();
                 

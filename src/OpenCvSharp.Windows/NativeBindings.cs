@@ -5,11 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenCvSharp.Native;
 using System.Threading;
+using System.Diagnostics;
 
 namespace OpenCvSharp.Windows
 {
     public class WindowsCapture : Capture
     {
+        static Stopwatch stopwatch;
+        static WindowsCapture()
+        {
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
+        }
+
         public override bool IsOpened => capture != null;
         public override event EventHandler<FrameArgs> FrameReady;
 
@@ -39,7 +47,7 @@ namespace OpenCvSharp.Windows
             double w = capture.Get(CaptureProperty.FrameWidth);
             double h = capture.Get(CaptureProperty.FrameHeight);
 
-            Logger.Log($"Capture Size: (w:{w},h:{h})  CaptureFormat:{capture.Get(CaptureProperty.FourCC)}");
+            Console.WriteLine($"Capture Size: (w:{w},h:{h})  CaptureFormat:{capture.Get(CaptureProperty.FourCC)}");
         }
 
         public override void Dispose()
@@ -80,8 +88,8 @@ namespace OpenCvSharp.Windows
 
                     FrameReady?.Invoke(this, arg);
 
-                    int sleep = (int)Math.Max(1, (1000.0 / fps) - (Logger.Stopwatch.ElapsedMilliseconds - lastMs));
-                    lastMs = Logger.Stopwatch.ElapsedMilliseconds;
+                    int sleep = (int)Math.Max(1, (1000.0 / fps) - (stopwatch.ElapsedMilliseconds - lastMs));
+                    lastMs = stopwatch.ElapsedMilliseconds;
                     lastKey = (char)Cv2.WaitKey(sleep);
                 }
                 else

@@ -72,12 +72,12 @@ namespace OpenCvSharp.Android
                 List<Hardware.Camera.Size> supportSize = parameter.SupportedPreviewSizes.OrderByDescending(x => x.Width).ToList();
                 foreach (Hardware.Camera.Size size in supportSize)
                 {
-                    Logger.Log(this, $"Camera Support Size: W{size.Width},H{size.Height}");
+                    CvLogger.Log(this, $"Camera Support Size: W{size.Width},H{size.Height}");
 
                     if (size.Width == 960 && size.Height == 720)
                     {
                         parameter.SetPreviewSize(size.Width, size.Height);
-                        Logger.Log(this, $"SET Camera Size: W{size.Width},H{size.Height}");
+                        CvLogger.Log(this, $"SET Camera Size: W{size.Width},H{size.Height}");
                     }
                 }
 
@@ -97,7 +97,7 @@ namespace OpenCvSharp.Android
                 fps = parameter.PreviewFrameRate;
                 cameraType = parameter.PreviewFormat;
 
-                Logger.Log(this, string.Format("Camera is creating W{0} H{1} FPS{2}", width, height, fps));
+                CvLogger.Log(this, string.Format("Camera is creating W{0} H{1} FPS{2}", width, height, fps));
                 Camera.SetParameters(parameter);
 
                 Camera.SetPreviewCallback(callback);
@@ -108,7 +108,7 @@ namespace OpenCvSharp.Android
             }
             catch (Exception ex)
             {
-                Logger.Log(this, "Camera Init Failed.\n" + ex.ToString());
+                CvLogger.Log(this, "Camera Init Failed.\n" + ex.ToString());
 
                 Dispose();
 
@@ -130,9 +130,9 @@ namespace OpenCvSharp.Android
 
         private void Callback_PreviewUpdated(object sender, PreviewUpdatedEventArgs e)
         {
-            Profiler.End("Captured");
-            Profiler.Start("Captured");
-            Profiler.Count("CapturedFPS");
+            CvProfiler.End("Captured");
+            CvProfiler.Start("Captured");
+            CvProfiler.Count("CapturedFPS");
 
             if (FrameReady == null)
                 return;
@@ -148,15 +148,15 @@ namespace OpenCvSharp.Android
                 CaptureCvtProc(e.Buffer, 0, 0);
             }
 
-            Profiler.Capture("TaskCount", LimitedTaskScheduler.QueuedTaskCount);
+            CvProfiler.Capture("TaskCount", LimitedTaskScheduler.QueuedTaskCount);
         }
 
         private void CaptureCvtProc(byte[] Buffer, long frameIndex, int threadindex)
         {
-            Profiler.Start("CaptureCvt" + threadindex);
+            CvProfiler.Start("CaptureCvt" + threadindex);
             Mat mat = null;
 
-            Profiler.Start("CaptureCvt.CvtColor" + threadindex);
+            CvProfiler.Start("CaptureCvt.CvtColor" + threadindex);
             switch (cameraType)
             {
                 case Graphics.ImageFormatType.Nv16:
@@ -175,20 +175,20 @@ namespace OpenCvSharp.Android
                 default:
                     throw new NotImplementedException("Unknown Camera Format");
             }
-            Profiler.End("CaptureCvt.CvtColor" + threadindex);
+            CvProfiler.End("CaptureCvt.CvtColor" + threadindex);
 
-            Profiler.Start("CaptureCvt.Tp" + threadindex);
+            CvProfiler.Start("CaptureCvt.Tp" + threadindex);
             Cv2.Transpose(mat, mat);
-            Profiler.End("CaptureCvt.Tp" + threadindex);
+            CvProfiler.End("CaptureCvt.Tp" + threadindex);
 
-            Profiler.Start("CaptureCvt.Flip" + threadindex);
+            CvProfiler.Start("CaptureCvt.Flip" + threadindex);
             if (cameraIndex == 1)
                 Cv2.Flip(mat, mat, FlipMode.XY);
             else
                 Cv2.Flip(mat, mat, FlipMode.Y);
-            Profiler.End("CaptureCvt.Flip" + threadindex);
+            CvProfiler.End("CaptureCvt.Flip" + threadindex);
 
-            Profiler.End("CaptureCvt" + threadindex);
+            CvProfiler.End("CaptureCvt" + threadindex);
             capturedBuffer = mat;
 
             var k = Cv2.WaitKey(1);
@@ -203,7 +203,7 @@ namespace OpenCvSharp.Android
                         if (mat != null)
                             mat.Dispose();
                         mat = null;
-                        Profiler.Count("CaptureSkipped");
+                        CvProfiler.Count("CaptureSkipped");
                         return;
                     }
 

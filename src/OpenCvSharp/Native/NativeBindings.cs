@@ -118,11 +118,11 @@ namespace OpenCvSharp.Native
         public abstract void Sleep(int sleep = 0);
         public void SleepEx(int sleep = 0)
         {
-            double startMs = Logger.Stopwatch.Elapsed.TotalMilliseconds;
+            double startMs = CvLogger.Stopwatch.Elapsed.TotalMilliseconds;
             while (true)
             {
                 Sleep(1);
-                if(Logger.Stopwatch.Elapsed.TotalMilliseconds - startMs > sleep - 0.7)
+                if(CvLogger.Stopwatch.Elapsed.TotalMilliseconds - startMs > sleep - 0.7)
                 {
                     return;
                 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenCvSharp
 {
-    public static class Logger
+    public static class CvLogger
     {
         public delegate void WriteMethodDelegate(string text);
 
@@ -17,7 +17,7 @@ namespace OpenCvSharp
         {
             get { return string.Format("[{0}]", Stopwatch.ElapsedMilliseconds); }
         }
-        static Logger()
+        static CvLogger()
         {
             WriteMethod = (s) => Debug.WriteLine(s);
             Stopwatch = new Stopwatch();

@@ -42,7 +42,7 @@ namespace OpenCvSharp.Android
         {
             if (ImShowTarget != null)
             {
-                Profiler.Start("imshow");
+                CvProfiler.Start("imshow");
                 lock (imShowLocker)
                 {
                     if (imShowBitmap == null)
@@ -78,7 +78,7 @@ namespace OpenCvSharp.Android
                         });
                     }
                 }
-                Profiler.End("imshow");
+                CvProfiler.End("imshow");
             }
         }
 
