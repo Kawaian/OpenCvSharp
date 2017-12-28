@@ -45,7 +45,7 @@ namespace OpenCvSharp.Native
 
         public abstract bool IsOpened { get; }
         public abstract event EventHandler<FrameArgs> FrameReady;
-
+        
         public abstract void Dispose();
         public void Start()
         {
