@@ -60,6 +60,10 @@ namespace OpenCvSharp.Native
         }
         protected abstract void OnStop();
 
+        public virtual int Index { get; private set; } = -1;
+        public virtual string FilePath { get; private set; } = null;
+
+
         public void Wait()
         {
             while (IsRunning)
@@ -70,12 +74,16 @@ namespace OpenCvSharp.Native
         
         public static Capture New(int index)
         {
-            return NativeBindings.Kernal.NewCapture(index);
+            var cap = NativeBindings.Kernal.NewCapture(index);
+            cap.Index = index;
+            return cap;
         }
 
         public static Capture New(string filePath)
         {
-            return NativeBindings.Kernal.NewCapture(filePath);
+            var cap = NativeBindings.Kernal.NewCapture(filePath);
+            cap.FilePath = filePath;
+            return cap;
         }
     }
 
