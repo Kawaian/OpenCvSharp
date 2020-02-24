@@ -39,12 +39,29 @@ namespace OpenCvSharp.Native
 {
     public abstract class Capture : IDisposable
     {
-        public bool IsRunning { get; protected set; }
+        bool isRunning = false;
+        public bool IsRunning 
+        {
+            get => isRunning;
+            protected set
+            {
+                if(value != isRunning)
+                {
+                    isRunning = value;
+                    if (value)
+                        CaptureStarted?.Invoke(this, EventArgs.Empty);
+                    else
+                        CaptureStopped?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
         public virtual double FPS { get; set; }
 
         public abstract bool IsOpened { get; }
         public abstract event EventHandler<FrameArgs> FrameReady;
+        public event EventHandler CaptureStarted;
+        public event EventHandler CaptureStopped;
         
         public abstract void Dispose();
         public void Start()

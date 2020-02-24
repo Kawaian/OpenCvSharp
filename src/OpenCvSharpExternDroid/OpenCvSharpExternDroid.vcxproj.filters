@@ -265,4 +265,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="include_opencv.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>

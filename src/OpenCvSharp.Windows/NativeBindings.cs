@@ -94,7 +94,8 @@ namespace OpenCvSharp.Windows
                 }
                 else
                 {
-                    Thread.Sleep(1);
+                    IsRunning = false;
+                    return;
                 }
 
                 if (arg.MatDispose)
